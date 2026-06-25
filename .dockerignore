@@ -1,0 +1,9 @@
+.git
+.github
+dist
+node_modules
+dev-server.out.log
+dev-server.err.log
+*.log
+tmp
+*.tmp
