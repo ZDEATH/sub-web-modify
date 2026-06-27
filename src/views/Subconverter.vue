@@ -431,6 +431,7 @@ const scriptConfigSample = process.env.VUE_APP_SCRIPT_CONFIG
 const filterConfigSample = process.env.VUE_APP_FILTER_CONFIG
 const defaultBackend = process.env.VUE_APP_SUBCONVERTER_DEFAULT_BACKEND
 const shortUrlBackend = process.env.VUE_APP_MYURLS_DEFAULT_BACKEND + '/short'
+const loyalsoldierWhitelistConfig = '__LOYALSOLDIER_WHITELIST_CONFIG__'
 const configUploadBackend = process.env.VUE_APP_CONFIG_UPLOAD_BACKEND + '/sub.php'
 const basicVideo = process.env.VUE_APP_BASIC_VIDEO
 const advancedVideo = process.env.VUE_APP_ADVANCED_VIDEO
@@ -480,12 +481,22 @@ export default {
         customBackend: {
           "肥羊增强型后端【vless reality+anytls】": "https://api.v1.mk",
           "肥羊备用后端【vless reality+anytls】": "https://url.v1.mk",
+          "本地测试后端": "http://localhost:25500",
         },
         backendOptions: [
           {value: "https://api.v1.mk"},
           {value: "https://url.v1.mk"},
         ],
         remoteConfig: [
+          {
+            label: "Loyalsoldier 白名单",
+            options: [
+              {
+                label: "clash-rules 白名单模式",
+                value: loyalsoldierWhitelistConfig
+              }
+            ]
+          },
           {
             label: "通用",
             options: [
@@ -1052,6 +1063,7 @@ export default {
           this.form.customBackend === ""
               ? defaultBackend
               : this.form.customBackend;
+      let remoteConfig = this.resolveRemoteConfigUrl(this.form.remoteConfig);
       let sourceSub = this.form.sourceSubUrl;
       sourceSub = sourceSub.replace(/(\n|\r|\n\r)/g, "|");
       this.customSubUrl =
@@ -1062,9 +1074,9 @@ export default {
           encodeURIComponent(sourceSub) +
           "&insert=" +
           this.form.insert;
-      if (this.form.remoteConfig !== "") {
+      if (remoteConfig !== "") {
         this.customSubUrl +=
-            "&config=" + encodeURIComponent(this.form.remoteConfig);
+            "&config=" + encodeURIComponent(remoteConfig);
       }
       if (this.form.excludeRemarks !== "") {
         this.customSubUrl +=
@@ -1332,10 +1344,11 @@ export default {
       })();
     },
     renderPost() {
+      let remoteConfig = this.resolveRemoteConfigUrl(this.form.remoteConfig);
       let data = new FormData();
       data.append("target", encodeURIComponent(this.form.clientType));
       data.append("url", encodeURIComponent(this.form.sourceSubUrl));
-      data.append("config", encodeURIComponent(this.form.remoteConfig));
+      data.append("config", encodeURIComponent(remoteConfig));
       data.append("exclude", encodeURIComponent(this.form.excludeRemarks));
       data.append("include", encodeURIComponent(this.form.includeRemarks));
       data.append("rename", encodeURIComponent(this.form.rename));
@@ -1388,6 +1401,12 @@ export default {
           .finally(() => {
             this.loading2 = false;
           })
+    },
+    resolveRemoteConfigUrl(remoteConfig) {
+      if (remoteConfig === loyalsoldierWhitelistConfig) {
+        return `${window.location.origin}/configs/loyalsoldier-whitelist.ini`;
+      }
+      return remoteConfig;
     },
     getBackendVersion() {
       this.$axios
