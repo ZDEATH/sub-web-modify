@@ -431,7 +431,8 @@ const scriptConfigSample = process.env.VUE_APP_SCRIPT_CONFIG
 const filterConfigSample = process.env.VUE_APP_FILTER_CONFIG
 const defaultBackend = process.env.VUE_APP_SUBCONVERTER_DEFAULT_BACKEND
 const shortUrlBackend = process.env.VUE_APP_MYURLS_DEFAULT_BACKEND + '/short'
-const loyalsoldierWhitelistConfig = '__LOYALSOLDIER_WHITELIST_CONFIG__'
+const loyalsoldierWhitelistConfig = process.env.VUE_APP_LOYALSOLDIER_WHITELIST_CONFIG ||
+    'https://raw.githubusercontent.com/ZDEATH/sub-web-modify/master/public/configs/loyalsoldier-whitelist.ini'
 const configUploadBackend = process.env.VUE_APP_CONFIG_UPLOAD_BACKEND + '/sub.php'
 const basicVideo = process.env.VUE_APP_BASIC_VIDEO
 const advancedVideo = process.env.VUE_APP_ADVANCED_VIDEO
@@ -1403,9 +1404,6 @@ export default {
           })
     },
     resolveRemoteConfigUrl(remoteConfig) {
-      if (remoteConfig === loyalsoldierWhitelistConfig) {
-        return `${window.location.origin}/configs/loyalsoldier-whitelist.ini`;
-      }
       return remoteConfig;
     },
     getBackendVersion() {
