@@ -51,6 +51,8 @@ dns:
     ipcidr:
       - 240.0.0.0/4
 
+proxies: []
+
 rule-providers:
   reject:
     type: http
