@@ -431,8 +431,6 @@ const scriptConfigSample = process.env.VUE_APP_SCRIPT_CONFIG
 const filterConfigSample = process.env.VUE_APP_FILTER_CONFIG
 const defaultBackend = process.env.VUE_APP_SUBCONVERTER_DEFAULT_BACKEND
 const shortUrlBackend = process.env.VUE_APP_MYURLS_DEFAULT_BACKEND + '/short'
-const loyalsoldierWhitelistConfig = process.env.VUE_APP_LOYALSOLDIER_WHITELIST_CONFIG ||
-    'https://raw.githubusercontent.com/ZDEATH/sub-web-modify/master/public/configs/loyalsoldier-whitelist.ini'
 const configUploadBackend = process.env.VUE_APP_CONFIG_UPLOAD_BACKEND + '/sub.php'
 const basicVideo = process.env.VUE_APP_BASIC_VIDEO
 const advancedVideo = process.env.VUE_APP_ADVANCED_VIDEO
@@ -490,17 +488,12 @@ export default {
         ],
         remoteConfig: [
           {
-            label: "Loyalsoldier 白名单",
-            options: [
-              {
-                label: "clash-rules 白名单模式",
-                value: loyalsoldierWhitelistConfig
-              }
-            ]
-          },
-          {
             label: "通用",
             options: [
+              {
+                label: "自定义规则",
+                value: "sub-web-modify\\public\\configs\\loyalsoldier-whitelist.ini"
+              },
               {
                 label: "默认",
                 value: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_NoAuto.ini"
