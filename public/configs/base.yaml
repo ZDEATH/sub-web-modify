@@ -158,7 +158,7 @@ rule-providers:
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Microsoft.list"
     path: ./ruleset/microsoft.list
     interval: 86400
-    
+
 rules:
   - RULE-SET,applications,DIRECT
   - DOMAIN,clash.razord.top,DIRECT
@@ -168,7 +168,7 @@ rules:
   - RULE-SET,overseas-ai,💬 Ai平台
   - RULE-SET,icloud,🍎 苹果服务
   - RULE-SET,apple,🍎 苹果服务
-  - RULE-SET,overseas-ai,Ⓜ️ 微软服务
+  - RULE-SET,microsoft,Ⓜ️ 微软服务
   - RULE-SET,google,🚀 节点选择
   - RULE-SET,telegramcidr,🚀 节点选择
   - RULE-SET,proxy,🚀 节点选择
