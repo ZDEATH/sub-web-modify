@@ -53,8 +53,6 @@ dns:
 
 proxies: []
 
-proxy-groups: []
-
 rule-providers:
   reject:
     type: http
@@ -147,14 +145,30 @@ rule-providers:
     path: ./ruleset/applications.yaml
     interval: 86400
 
+  overseas-ai:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/viewer12/OverseasAI.list/main/rule/Clash/OverseasAI/OverseasAI.list"
+    path: ./ruleset/overseas-ai.list
+    interval: 86400
+    
+  microsoft:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Microsoft.list"
+    path: ./ruleset/microsoft.list
+    interval: 86400
+    
 rules:
   - RULE-SET,applications,DIRECT
   - DOMAIN,clash.razord.top,DIRECT
   - DOMAIN,yacd.haishan.me,DIRECT
   - RULE-SET,private,DIRECT
   - RULE-SET,reject,REJECT
+  - RULE-SET,overseas-ai,💬 Ai平台
   - RULE-SET,icloud,🍎 苹果服务
   - RULE-SET,apple,🍎 苹果服务
+  - RULE-SET,overseas-ai,Ⓜ️ 微软服务
   - RULE-SET,google,🚀 节点选择
   - RULE-SET,telegramcidr,🚀 节点选择
   - RULE-SET,proxy,🚀 节点选择
