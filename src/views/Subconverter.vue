@@ -492,7 +492,7 @@ export default {
             options: [
               {
                 label: "自定义规则",
-                value: "sub-web-modify\\public\\configs\\loyalsoldier-whitelist.ini"
+                value: "https://raw.githubusercontent.com/ZDEATH/sub-web-modify/refs/heads/dev/public/configs/loyalsoldier-whitelist.ini"
               },
               {
                 label: "默认",
