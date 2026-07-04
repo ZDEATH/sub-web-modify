@@ -159,4 +159,4 @@ rules:
   - RULE-SET,cncidr,DIRECT
   - GEOIP,LAN,DIRECT
   - GEOIP,CN,DIRECT
-  - MATCH,🚀 节点选择
+  - MATCH,🐟 漏网之鱼
